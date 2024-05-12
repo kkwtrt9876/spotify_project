@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1DB954;
+            color: white;
+            padding: 10px 20px;
+            text-align: left;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav input[type="text"] {
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+        main {
+            display: flex;
+            margin-top: 20px;
+        }
+        .song-list {
+            flex: 3;
+            padding: 0 20px;
+        }
+        .song {
+            cursor: pointer;
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .song:hover {
+            transform: translateY(-3px);
+        }
+        .song img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .recommendations {
+            flex: 1;
+            padding: 0 20px;
+        }
+        .recommendation {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Music Platform</h1>
+            <form id="searchForm" action="search" method="post">
+                <input type="text" name="query" placeholder="Search for songs...">
+                <button type="submit">Search</button>
+            </form>
+            <button onclick="window.location.href='/logout';">Logout</button>
+        </nav>
+    </header>
+    <main>
+        <section class="song-list">
+            {% for song in songs %}
+            <div class="song">
+                <h4><a href="{{ url_for('play_song', song_name=song['song']) }}">{{ song['song'] }}</a></h4>
+            </div>
+            {% endfor %}
+        </section>
+        
+        
+        <aside class="recommendations">
+            <h3>Recommended</h3>
+            <!-- Recommendations will be dynamically inserted here -->
+        </aside>
+    </main>
+</body>
+</html>
